@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<--! <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,7 @@
 
     <div class="btn-group">
         <a href="hello-servlet" class="btn btn-primary ">Hello Servlet</a>
-        <a href="hello-servlet" class="btn btn-primary ">Hello Servlet</a>
+        <a href="PersonasController" class="btn btn-primary ">Personas</a>
         <a href="" class="btn btn-primary" aria-current="page">Nuevo registro</a>
     </div>
 
@@ -31,6 +33,8 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Direccion</th>
+                <th scope="col">Acciones</th>
+
             </tr>
             </thead>
             <tbody>
@@ -40,7 +44,7 @@
                 <td>Cell</td>
                 <td>Cell</td>
                 <td>Cell</td>
-                <td>Acciones</td>
+                <td>Actualizar, eliminar</td>
             </tr>
             <tr>
                 <th scope="row">2</th>
@@ -48,6 +52,7 @@
                 <td>Cell</td>
                 <td>Cell</td>
                 <td>Cell</td>
+                <td>Actualizar, eliminar</td>
             </tr>
             </tbody>
         </table>
