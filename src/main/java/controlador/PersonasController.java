@@ -36,7 +36,6 @@ public class PersonasController extends HttpServlet {
         accion = request.getParameter("accion");
 
         if (accion == null || accion.isEmpty()) {
-            //dispatcher = request.getRequestDispatcher("/Personas/index.jsp");
             assert personaDAO != null;
             List<Personas> listaPersonas = personaDAO.listarpersonas();
             request.setAttribute("lista", listaPersonas);
@@ -58,7 +57,7 @@ public class PersonasController extends HttpServlet {
             int direccion = Integer.parseInt(request.getParameter("direccion"));
 
             Personas persona = new Personas(id,nombre,apellido,correo,direccion);
-            //Personas(0,Pepito,perez,correo@gmail.com,5);
+            //PersonasController?accion=insertar(0,Pepito,perez,correo@gmail.com,1);
 
             PersonasDAO.insertar(persona);
 
@@ -68,12 +67,9 @@ public class PersonasController extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             pw.print(personaJsonString);
             pw.flush();
-
-
+        }else if("eliminar".equals(accion)) {
+            //
         }
-
-       /* assert dispatcher != null;
-        dispatcher.forward(request,response);*/
     }
 
     @Override
