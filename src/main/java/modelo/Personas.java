@@ -1,10 +1,10 @@
 package modelo;
 
 public class Personas {
-    private int id, direccion;
-    private  String nombre, apellido,correo;
+    private int id;
+    private  String nombre, apellido,correo, direccion;
 
-    public Personas(int id,  String nombre,String apellido,  String correo, int direccion ) {
+    public Personas(int id, String nombre, String apellido, String correo, String direccion ) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -20,11 +20,11 @@ public class Personas {
         this.id = id;
     }
 
-    public int getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(int direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 

@@ -22,7 +22,7 @@ public class PersonasDAO {
         List<Personas> lista = new ArrayList<>();
 
         try {
-            ps = conexion.prepareStatement("select id,nombre,apellido,correo,direccion from personas JOIN direcciones WHERE personas.direccion = direcciones.idDireccion");
+            ps = conexion.prepareStatement("select id,nombre,apellido,correo,direcciones.nombreDireccion from personas JOIN direcciones WHERE personas.direccion = direcciones.idDireccion");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -30,7 +30,7 @@ public class PersonasDAO {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String correo = rs.getString("correo");
-                int direccion = rs.getInt("direccion");
+                String direccion = rs.getString("direccion");
 
                 Personas personas = new Personas(id, nombre, apellido, correo, direccion);
                 lista.add(personas);
@@ -60,7 +60,7 @@ public class PersonasDAO {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String correo = rs.getString("correo");
-                int direccion = rs.getInt("direccion");
+                String direccion = rs.getString("direccion");
 
                 persona = new Personas(id, nombre, apellido, correo, direccion);
 
@@ -84,7 +84,7 @@ public class PersonasDAO {
             ps.setString(2, persona.getNombre());
             ps.setString(3, persona.getApellido());
             ps.setString(4, persona.getCorreo());
-            ps.setInt(5, persona.getDireccion());
+            ps.setString(5, persona.getDireccion());
 
             ps.execute();
 
@@ -109,7 +109,7 @@ public class PersonasDAO {
             ps.setString(2, persona.getNombre());
             ps.setString(3, persona.getApellido());
             ps.setString(4, persona.getCorreo());
-            ps.setInt(5, persona.getDireccion());
+            ps.setString(5, persona.getDireccion());
             ps.setInt(6, persona.getId());
 
             ps.execute();

@@ -47,14 +47,12 @@ public class PersonasController extends HttpServlet {
             pw.print(personaJsonString);
             pw.flush();
 
-        } else if ("nuevo".equals(accion)) {
-            //Nuevo vista;
         } else if ("insertar".equals(accion)) {
             int id = Integer.parseInt(request.getParameter("id"));
-            String nombre = request.getParameter("direccion");
+            String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
-            String correo = request.getParameter("direccion");
-            int direccion = Integer.parseInt(request.getParameter("direccion"));
+            String correo = request.getParameter("correo");
+            String direccion = request.getParameter("direccion");
 
             Personas persona = new Personas(id,nombre,apellido,correo,direccion);
             //PersonasController?accion=insertar(0,Pepito,perez,correo@gmail.com,1);
