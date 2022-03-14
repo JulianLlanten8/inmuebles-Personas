@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<--! <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
 
 <!DOCTYPE html>
 <html>
@@ -38,21 +37,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Actualizar, eliminar</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Actualizar, eliminar</td>
+            <tr v-for="persona in personas" :key="persona.id">
+                <td v-text="persona.id"></td>
+                <td v-text="persona.nombre"></td>
+                <td v-text="persona.apellido"></td>
+                <td v-text="persona.correo"></td>
+                <td v-text="persona.direccion"></td>
+                <td>
+                    <button type="button" class="btn btn-primary">Editar</button>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                </td>
+
             </tr>
             </tbody>
         </table>
@@ -62,10 +57,33 @@
 </body>
 </html>
 <script>
-    var app = new Vue({
+    const app = new Vue({
         el: '#app', //id del div o elemento del DOM
         data: {
-            title: 'Inmuebles'
+            title: 'Inmuebles',
+            personas: {}
         },
-    })
+        created: function () {
+            // `this` hace referencia a la instancia vm
+            console.log('La vista ' + this.title)
+            this.getPersonas();
+        },
+        methods: {
+            getPersonas() {
+                const urlPersonas = "PersonasController";
+                axios.get(urlPersonas).then(response => {
+                    this.personas = response.data;
+                    console.log(response.data);
+                }).catch(e => {
+                    alert(e);
+                });
+            }
+        }
+    });
+
 </script>
+<style>
+    body {
+        background-color: #4D77FF;
+    }
+</style>

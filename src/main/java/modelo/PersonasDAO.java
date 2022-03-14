@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonasDAO {
-    Connection conexion;
+    static Connection conexion;
 
-    public PersonasDAO() {
+    public PersonasDAO() throws ClassNotFoundException {
         Conexion con = new Conexion();
         conexion = con.getConexion();
 
@@ -22,7 +22,7 @@ public class PersonasDAO {
         List<Personas> lista = new ArrayList<>();
 
         try {
-            ps = conexion.prepareStatement("select id,nombre,apellido,correo,direccion from personas");
+            ps = conexion.prepareStatement("select id,nombre,apellido,correo,direccion from personas JOIN direcciones WHERE personas.direccion = direcciones.idDireccion");
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -74,14 +74,12 @@ public class PersonasDAO {
 
     }
 
-    public Boolean insertar(Personas persona) {
+    public static Boolean insertar(Personas persona) {
         PreparedStatement ps;
-
-
         persona = null;
 
         try {
-            ps = conexion.prepareStatement("insert into personas(null,nombre,apellido, correo, direccion) values (?,?,?,?,?)");
+            ps = conexion.prepareStatement("insert into personas(id,nombre,apellido, correo, direccion) values (?,?,?,?,?)");
 
             ps.setString(2, persona.getNombre());
             ps.setString(3, persona.getApellido());
@@ -106,7 +104,7 @@ public class PersonasDAO {
         persona = null;
 
         try {
-            ps = conexion.prepareStatement("update personas set null,nombre=?,apellido=?, correo=?, direccion=? where id =?");
+            ps = conexion.prepareStatement("update personas set id =?,nombre=?,apellido=?, correo=?, direccion=? where id =?");
 
             ps.setString(2, persona.getNombre());
             ps.setString(3, persona.getApellido());

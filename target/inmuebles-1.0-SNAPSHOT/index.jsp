@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,7 @@
 
     <div class="btn-group">
         <a href="hello-servlet" class="btn btn-primary ">Hello Servlet</a>
+        <a href="PersonasController" class="btn btn-primary ">Personas</a>
         <a href="" class="btn btn-primary" aria-current="page">Nuevo registro</a>
     </div>
 
@@ -30,24 +32,23 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Direccion</th>
+                <th scope="col">Acciones</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Acciones</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-            </tr>
+                <tr v-for="persona in personas" :key="persona.id">
+                    <td v-text="persona.id"></td>
+                    <td v-text="persona.nombre"></td>
+                    <td v-text="persona.apellido"></td>
+                    <td v-text="persona.correo"></td>
+                    <td v-text="persona.direccion"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Editar</button>
+                        <button type="button" class="btn btn-danger">Eliminar</button>
+                    </td>
+
+                </tr>
             </tbody>
         </table>
     </section>
@@ -56,10 +57,32 @@
 </body>
 </html>
 <script>
-    var app = new Vue({
+    const app = new Vue({
         el: '#app', //id del div o elemento del DOM
         data: {
-            title: 'Inmuebles'
+            title: 'Inmuebles',
+            personas: {}
         },
-    })
+        created: function () {
+            // `this` hace referencia a la instancia vm
+            console.log('La vista ' + this.title)
+            this.getPersonas();
+        },
+        methods: {
+            getPersonas() {
+                const urlPersonas = "PersonasController";
+                axios.get(urlPersonas).then(response => {
+                    console.log(response.data);
+                }).catch(e => {
+                    alert(e);
+                });
+            }
+        }
+    });
+
 </script>
+<style>
+    body{
+        background-color: #242424;
+    }
+</style>
